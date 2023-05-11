@@ -20,6 +20,12 @@
 		    <log message="processing ${headers.CamelFileName}" loggingLevel="INFO"/>
 		    <to uri="sftp://172.30.51.54:22/appo?username=prova1&amp;password=prova1&amp;binary=true"/>
 		</route>
+
+		 <route>
+		  <from uri="file:C://tmp//data//inputFolder?include=.*.xlsx&amp;preMove=staging&amp;move=completed&amp;moveFailed=failed"/>
+		  <log message=">>> ${headers.CamelFileName}" />
+		  <to uri="sftp://{{sftp.username}}@{{sftp.host}}:{{sftp.port}}/{{sftp.virtualDirectory}}?privateKeyFile={{sftp.private-key-file}}&amp;binary=true&amp;tempFileName=${file:name.noext}.tmp"/>
+		</route>
         
 		
 		 -->
